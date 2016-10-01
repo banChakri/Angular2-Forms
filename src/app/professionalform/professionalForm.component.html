@@ -1,0 +1,52 @@
+<div class="container">
+    <div *ngIf="!submitted">
+        <h1>Professional Form</h1>
+        <form [formGroup]="professionalForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" formControlName="firstName" />
+                <div class="alert alert-danger" [hidden]="professionalForm.controls.firstName.valid">FirstName is required</div>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" formControlName="lastName" />
+                <div class="alert alert-danger" [hidden]="professionalForm.controls.lastName.valid">LastName is required</div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" formControlName="email" />
+                <div class="alert alert-danger" [hidden]="professionalForm.controls.email.valid">Email is required and must be a valid email pattern</div>
+            </div>
+            <div class="form-group">
+                <label for="dropDown">Drop Down</label>
+                <select class="form-control" formControlName="dropDown">
+                  <option *ngFor="let p of dropDown" [value]="p">{{p}}</option>
+                </select>
+                <div class="alert alert-danger" [hidden]="professionalForm.controls.dropDown.valid">Drop Down is required</div>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!professionalForm.valid">Submit</button> 
+        </form>  
+    </div>
+                                
+    <div *ngIf="submitted">
+        <h2>You submitted the following:</h2>
+        <div class="row">
+            <div class="col-md-2">First Name</div>
+            <div class="col-md-10 pull-left">{{ professionalForm.controls.firstName.value }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Last Name</div>
+            <div class="col-md-10 pull-left">{{ professionalForm.controls.lastName.value }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Email</div>
+            <div class="col-md-10 pull-left">{{ professionalForm.controls.email.value }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">dropDown</div>
+            <div class="col-md-10 pull-left">{{ professionalForm.controls.dropDown.value }}</div>
+        </div>
+        <br />
+        <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    </div>    
+</div>
